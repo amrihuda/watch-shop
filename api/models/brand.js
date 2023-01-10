@@ -15,9 +15,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   brand.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          message: "Username must not be empty!"
+        }
+      }
+    },
+    image: DataTypes.STRING,
     desc: DataTypes.STRING
   }, {
+    hooks: {
+      beforeCreate: function (brand, options) {
+        brand.image = brand.image || "brand.png"
+      }
+    },
     sequelize,
     modelName: 'brand',
   });

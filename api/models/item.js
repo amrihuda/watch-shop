@@ -17,7 +17,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   item.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          message: "Username must not be empty!"
+        }
+      }
+    },
     desc: DataTypes.STRING,
     price: DataTypes.INTEGER,
     stock: DataTypes.INTEGER,

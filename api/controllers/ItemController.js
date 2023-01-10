@@ -14,10 +14,10 @@ class ItemController {
 
     static async create(req, res) {
         try {
-            const { name, desc, price, stock, image, categoryId, brandId } = req.body
+            const { name, desc, price, stock, categoryId, brandId } = req.body
             const userId = +req.userData.id
 
-            let result = await item.create({ name, desc, price, stock, image, userId, categoryId, brandId })
+            let result = await item.create({ name, desc, price, stock, image: req.file.filename, userId, categoryId, brandId })
 
             res.status(201).json(result)
         } catch (error) {
@@ -28,14 +28,21 @@ class ItemController {
     static async update(req, res) {
         try {
             const id = +req.params.id
-            const { name, desc, price, stock, image, userId, categoryId, brandId } = req.body
-            
+            const { name, desc, price, stock, image, categoryId, brandId } = req.body
+            const userId = +req.userData.id
+
             let result = await item.update(
                 { name, desc, price, stock, image, userId, categoryId, brandId },
                 { where: { id } }
             )
 
-            res.status(201).json(result)
+            result[0] === 1 ?
+                res.status(200).json({
+                    message: `Item id ${id} updated successfully!`
+                }) :
+                res.status(404).json({
+                    message: `Item id ${id} not updated successfully!`
+                })
         } catch (error) {
             res.status(500).json(error)
         }
@@ -44,7 +51,7 @@ class ItemController {
     static async delete(req, res) {
         try {
             const id = +req.params.id
-            
+
             let result = await item.destroy({ where: { id } })
 
             result === 1 ?
@@ -62,8 +69,8 @@ class ItemController {
     static async getById(req, res) {
         try {
             const id = +req.params.id
-            
-            let result = await item.findByPk(id)
+
+            let result = await item.findByPk(id, { include: { all: true } })
 
             res.status(200).json(result)
         } catch (error) {

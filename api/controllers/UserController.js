@@ -60,7 +60,13 @@ class UserController {
 
             let result = await user.update({ username, email, password }, { where: { id } })
 
-            res.status(201).json(result)
+            result[0] === 1 ?
+                res.status(200).json({
+                    message: `User id ${id} updated successfully!`
+                }) :
+                res.status(404).json({
+                    message: `User id ${id} not updated successfully!`
+                })
         } catch (error) {
             res.status(500).json(error)
         }

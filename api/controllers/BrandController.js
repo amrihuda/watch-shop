@@ -1,24 +1,75 @@
 const { brand } = require('../models')
 
 class BrandController {
-    static getAll(req, res) {
+    static async getAll(req, res) {
+        try {
+            let brands = await brand.findAll()
 
-    }
-    
-    static create(req, res) {
-
-    }
-
-    static update(req, res) {
-
+            res.status(200).json(brands)
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 
-    static delete(req, res) {
+    static async create(req, res) {
+        try {
+            const { name, desc } = req.body
 
+            let result = await brand.create({ name, desc, image: req.file.filename })
+
+            res.status(201).json(result)
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 
-    static getById(req, res) {
+    static async update(req, res) {
+        try {
+            const id = +req.params.id
+            const { name, desc } = req.body
 
+            let result = await brand.update({ name, desc }, { where: { id } })
+
+            result[0] === 1 ?
+                res.status(200).json({
+                    message: `Brand id ${id} updated successfully!`
+                }) :
+                res.status(404).json({
+                    message: `Brand id ${id} not updated successfully!`
+                })
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
+
+    static async delete(req, res) {
+        try {
+            const id = +req.params.id
+
+            let result = await brand.destroy({ where: { id } })
+
+            result === 1 ?
+                res.status(200).json({
+                    message: `Category id ${id} deleted successfully!`
+                }) :
+                res.status(404).json({
+                    message: `Category id ${id} not deleted successfully!`
+                })
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
+
+    static async getById(req, res) {
+        try {
+            const id = +req.params.id
+
+            let result = await brand.findByPk(id)
+
+            res.status(200).json(result)
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 }
 
