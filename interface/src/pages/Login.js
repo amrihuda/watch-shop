@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import { userLogin } from '../axios/userAxios'
+import { Navigate } from "react-router-dom"
 
 const Login = (props) => {
-    const { loginHandler } = props
+    const { loginStatus, loginHandler } = props
     const [form, setForm] = useState({
         usernameOrEmail: '',
         password: ''
@@ -10,16 +11,12 @@ const Login = (props) => {
 
     const loginUser = async () => {
         try {
-            let result = await axios({
-                method: 'POST',
-                url: 'http://localhost:3000/api/users/login',
-                data: form
-            })
+            let result = await userLogin(form)
             const { user_token } = result.data
             localStorage.setItem('user_token', user_token)
             loginHandler(true)
         } catch (error) {
-            console.log(error)
+            alert(error.response.data.message)
         }
     }
 
@@ -32,7 +29,7 @@ const Login = (props) => {
             <div className='login-page text-center'>
                 <main className="form-signin w-100 m-auto">
                     <form onSubmit={() => submitHandler()}>
-                        <img className="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
+                        <img className="mb-4" src="/logo192.png" alt="" width="72" height="57" />
                         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
                         <div className="form-floating">

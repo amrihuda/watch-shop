@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
 
-import LoginPage from './pages/Login'
-import HomePage from './pages/Home'
+import { Navbar, Main } from './components'
+import { LoginPage } from './pages';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false)
@@ -22,10 +25,23 @@ function App() {
 
   return (
     <>
-      {loginStatus ?
-        <HomePage loginStatus={loginStatus} loginHandler={loginHandler}></HomePage> :
+      <Navbar loginStatus={loginStatus} loginHandler={loginHandler} />
+      <Main loginStatus={loginStatus} loginHandler={loginHandler} />
+      {/* <Routes>
+        <Route path="/" element={
+          <>
+            <Navbar loginStatus={loginStatus} loginHandler={loginHandler} />
+            <Main loginStatus={loginStatus} loginHandler={loginHandler} />
+          </>
+        } />
+        <Route path='/login' element={<LoginPage loginStatus={loginStatus} loginHandler={loginHandler} />} />
+      </Routes> */}
+
+      {/* {loginStatus ?
+        <HomePage loginStatus={loginStatus} loginHandler={loginHandler}></HomePage>
+        :
         <LoginPage loginHandler={loginHandler}></LoginPage>
-      }
+      } */}
     </>
   );
 }
