@@ -1,4 +1,5 @@
 import Login from './Login'
+import Register from './Register'
 import Home from './Home'
 
 // Item
@@ -20,8 +21,7 @@ import CategoryAdd from './Categories/CategoryAdd'
 import CategoryEdit from './Categories/CategoryEdit'
 
 export {
-    Login,
-    Home,
+    Home, Login, Register,
     Item, ItemList, ItemAdd, ItemEdit,
     Brand, BrandList, BrandAdd, BrandEdit,
     Category, CategoryList, CategoryAdd, CategoryEdit

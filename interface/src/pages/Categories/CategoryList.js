@@ -26,18 +26,18 @@ const CategoryList = () => {
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Options</th>
+                                <th className='text-end'>Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                categories.map(category => {
+                                categories.map((category, i) => {
                                     const { id, name } = category
                                     return (
                                         <tr key={id}>
-                                            <td>{id}</td>
+                                            <td>{i + 1}</td>
                                             <td>{name}</td>
-                                            <td>
+                                            <td className='text-end'>
                                                 <Link to={`edit/${id}`} className='btn btn-sm btn-info'>Edit</Link>
                                                 <button onClick={() => deleteHandler(id)} className='btn btn-sm btn-danger'>Delete</button>
                                             </td>

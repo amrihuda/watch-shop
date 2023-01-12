@@ -8,7 +8,7 @@ const Main = (props) => {
     return (
         <>
             <Navbar loginStatus={loginStatus} loginHandler={loginHandler} />
-            <div className='container'>
+            <div className='container pb-5'>
                 <Outlet />
             </div>
         </>

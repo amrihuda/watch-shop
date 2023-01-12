@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { itemPost } from '../../axios/itemAxios'
 import { useNavigate } from 'react-router-dom'
+import { categoryGet } from '../../axios/categoryAxios'
+import { brandGet } from '../../axios/brandAxios'
 
 const ItemAdd = () => {
     const [form, setForm] = useState({
@@ -12,6 +14,8 @@ const ItemAdd = () => {
         categoryId: "",
         brandId: ""
     })
+    const [categories, setCategory] = useState([])
+    const [brands, setBrand] = useState([])
 
     const navigation = useNavigate()
 
@@ -20,6 +24,12 @@ const ItemAdd = () => {
             navigation('/items')
         })
     }
+
+    useEffect(() => {
+        categoryGet(result => setCategory(result))
+        brandGet(result => setBrand(result))
+    }, [])
+
     return (
         <>
             <form>
@@ -35,14 +45,14 @@ const ItemAdd = () => {
                         onChange={(e) => setForm({ ...form, desc: e.target.value })}
                         type="text" className="form-control" required />
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Price</label>
-                    <div class="input-group">
-                        <span class="input-group-text">Rp</span>
+                <div className="mb-3">
+                    <label className="form-label">Price</label>
+                    <div className="input-group">
+                        <span className="input-group-text">Rp</span>
                         <input
                             onChange={(e) => setForm({ ...form, price: e.target.value })}
-                            type="number" class="form-control" min="0" required />
-                        <span class="input-group-text">.00</span>
+                            type="number" className="form-control" min="0" required />
+                        <span className="input-group-text">.00</span>
                     </div>
                 </div>
                 <div className="mb-3">
@@ -59,15 +69,33 @@ const ItemAdd = () => {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Brand</label>
-                    <input
-                        onChange={(e) => setForm({ ...form, brandId: e.target.value })}
-                        type="text" className="form-control" required />
+                    <select className="form-select"
+                        onChange={(e) => setForm({ ...form, brandId: e.target.value })}>
+                        <option selected></option>
+                        {
+                            brands.map((brand, i) => {
+                                const { id, name } = brand
+                                return (
+                                    <option key={id} value={id}>{name}</option>
+                                )
+                            })
+                        }
+                    </select>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Category</label>
-                    <input
-                        onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
-                        type="text" className="form-control" required />
+                    <select className="form-select"
+                        onChange={(e) => setForm({ ...form, categoryId: e.target.value })}>
+                        <option selected></option>
+                        {
+                            categories.map((category, i) => {
+                                const { id, name } = category
+                                return (
+                                    <option key={id} value={id}>{name}</option>
+                                )
+                            })
+                        }
+                    </select>
                 </div>
                 <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
             </form>

@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 const Category = () => {
     return (
         <>
-            <div>Category Page</div>
+            <h3>Category Page</h3>
             <Outlet />
         </>
     )

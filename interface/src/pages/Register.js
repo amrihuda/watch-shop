@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { userLogin } from '../axios/userAxios'
+import { userPost } from '../axios/userAxios'
 import { useNavigate } from "react-router-dom"
 
 const Login = (props) => {
-    const { loginStatus, loginHandler } = props
+    const { loginStatus } = props
     const [form, setForm] = useState({
-        usernameOrEmail: '',
+        username: '',
+        email: '',
         password: ''
     })
 
     const submitHandler = (e) => {
         e.preventDefault()
-        userLogin(form, result => {
-            localStorage.setItem('user_token', result.user_token)
-            loginHandler(true)
+        userPost(form, () => {
+            navigation('/login')
         })
     }
 
@@ -30,13 +30,19 @@ const Login = (props) => {
                 <main className="form-signin w-100 m-auto">
                     <form onSubmit={submitHandler}>
                         <img className="mb-4" src="/logo192.png" alt="" width="72" height="72" />
-                        <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                        <h1 className="h3 mb-3 fw-normal">Sign up</h1>
 
                         <div className="form-floating">
                             <input
-                                onChange={(e) => setForm({ ...form, usernameOrEmail: e.target.value })}
-                                type="text" className="form-control" id="floatingInput" placeholder="username or name@example.com" />
-                            <label for="floatingInput">Username or Email</label>
+                                onChange={(e) => setForm({ ...form, username: e.target.value })}
+                                type="text" className="form-control" id="floatingUsername" placeholder="username" />
+                            <label for="floatingUsername">Username</label>
+                        </div>
+                        <div className="form-floating">
+                            <input
+                                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                                type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                            <label for="floatingInput">Email address</label>
                         </div>
                         <div className="form-floating">
                             <input
@@ -45,13 +51,8 @@ const Login = (props) => {
                             <label for="floatingPassword">Password</label>
                         </div>
 
-                        <div className="checkbox mb-3">
-                            <label>
-                                <input type="checkbox" value="remember-me" /> Remember me
-                            </label>
-                        </div>
-                        <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                        <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
+                        <button className="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+                        <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
                     </form>
                 </main>
             </div>

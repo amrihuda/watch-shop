@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 const Item = () => {
     return (
         <>
-            <div>Item Page</div>
+            <h3>Item Page</h3>
             <Outlet />
         </>
     )

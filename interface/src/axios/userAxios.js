@@ -24,12 +24,24 @@ const userLogin = async (data, cb) => {
     }
 }
 
-const userPost = (data) => {
-    return axios({
-        method: 'POST',
-        url: URL,
-        data
-    })
+const userPost = async (data, cb) => {
+    try {
+        let result = await axios({
+            method: 'POST',
+            url: URL,
+            data
+        })
+        cb(result.data)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 const userPut = (data) => {

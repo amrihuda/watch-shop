@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 const Brand = () => {
     return (
         <>
-            <h1>Brand Page</h1>
+            <h3>Brand Page</h3>
             <Outlet />
         </>
     )

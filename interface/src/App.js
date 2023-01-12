@@ -8,7 +8,7 @@ import './App.css';
 import { Main } from './components'
 
 import {
-  Home, Login,
+  Home, Login, Register,
   Item, ItemList, ItemAdd, ItemEdit,
   Brand, BrandList, BrandAdd, BrandEdit,
   Category, CategoryList, CategoryAdd, CategoryEdit
@@ -57,6 +57,7 @@ function App() {
           </Route>
         </Route>
         <Route path='/login' element={<Login loginStatus={loginStatus} loginHandler={loginHandler} />} />
+        <Route path='/Register' element={<Register loginStatus={loginStatus} />} />
       </Routes>
     </>
   );

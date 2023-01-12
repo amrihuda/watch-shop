@@ -27,20 +27,20 @@ const BrandList = () => {
                                 <th>Name</th>
                                 <th>Desc</th>
                                 <th>Image</th>
-                                <th>Options</th>
+                                <th className='text-end'>Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                brands.map(brand => {
+                                brands.map((brand, i) => {
                                     const { id, name, desc, image } = brand
                                     return (
                                         <tr key={id}>
-                                            <td>{id}</td>
+                                            <td>{i + 1}</td>
                                             <td>{name}</td>
                                             <td>{desc}</td>
                                             <td>{image}</td>
-                                            <td>
+                                            <td className='text-end'>
                                                 <Link to={`edit/${id}`} className='btn btn-sm btn-info'>Edit</Link>
                                                 <button onClick={() => deleteHandler(id)} className='btn btn-sm btn-danger'>Delete</button>
                                             </td>

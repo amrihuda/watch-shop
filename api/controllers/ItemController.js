@@ -17,7 +17,7 @@ class ItemController {
             const { name, desc, price, stock, categoryId, brandId } = req.body
             const userId = +req.userData.id
 
-            let result = await item.create({ name, desc, price, stock, image: req.file.filename, userId, categoryId, brandId })
+            let result = await item.create({ name, desc, price, stock, image: req.file?.filename, userId, categoryId, brandId })
 
             res.status(201).json(result)
         } catch (error) {

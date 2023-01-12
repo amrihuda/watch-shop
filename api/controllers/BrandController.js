@@ -15,7 +15,7 @@ class BrandController {
         try {
             const { name, desc } = req.body
 
-            let result = await brand.create({ name, desc, image: req.file.filename })
+            let result = await brand.create({ name, desc, image: req.file?.filename })
 
             res.status(201).json(result)
         } catch (error) {

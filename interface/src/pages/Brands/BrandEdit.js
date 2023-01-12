@@ -48,11 +48,11 @@ const BrandEdit = () => {
                         onChange={(e) => setForm({ ...form, desc: e.target.value })}
                         type="text" className="form-control" />
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Image</label>
+                <div className="mb-3">
+                    <label className="form-label">Image</label>
                     <input
                         onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
-                        class="form-control" type="file" />
+                        className="form-control" type="file" />
                 </div>
                 <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
             </form>
