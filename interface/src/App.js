@@ -5,8 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
 
-import { Navbar, Main } from './components'
-import { LoginPage } from './pages';
+import { Main } from './components'
+
+import {
+  Home, Login,
+  Item, ItemList, ItemAdd, ItemEdit,
+  Brand, BrandList, BrandAdd, BrandEdit,
+  Category, CategoryList, CategoryAdd, CategoryEdit
+} from './pages'
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false)
@@ -25,23 +31,33 @@ function App() {
 
   return (
     <>
-      <Navbar loginStatus={loginStatus} loginHandler={loginHandler} />
-      <Main loginStatus={loginStatus} loginHandler={loginHandler} />
-      {/* <Routes>
-        <Route path="/" element={
-          <>
-            <Navbar loginStatus={loginStatus} loginHandler={loginHandler} />
-            <Main loginStatus={loginStatus} loginHandler={loginHandler} />
-          </>
-        } />
-        <Route path='/login' element={<LoginPage loginStatus={loginStatus} loginHandler={loginHandler} />} />
-      </Routes> */}
-
-      {/* {loginStatus ?
-        <HomePage loginStatus={loginStatus} loginHandler={loginHandler}></HomePage>
-        :
-        <LoginPage loginHandler={loginHandler}></LoginPage>
-      } */}
+      <Routes>
+        <Route path="/" element={<Main loginStatus={loginStatus} loginHandler={loginHandler} />} >
+          <Route path='' element={<Home loginStatus={loginStatus} loginHandler={loginHandler} />} />
+          <Route path='items' element={<Item />}>
+            <Route path='' element={<ItemList />} />
+            <Route path='create' element={<ItemAdd />} />
+            <Route path='edit'>
+              <Route path=':id' element={<ItemEdit />} />
+            </Route>
+          </Route>
+          <Route path='brands' element={<Brand />}>
+            <Route path='' element={<BrandList />} />
+            <Route path='create' element={<BrandAdd />} />
+            <Route path='edit'>
+              <Route path=':id' element={<BrandEdit />} />
+            </Route>
+          </Route>
+          <Route path='categories' element={<Category />}>
+            <Route path='' element={<CategoryList />} />
+            <Route path='create' element={<CategoryAdd />} />
+            <Route path='edit'>
+              <Route path=':id' element={<CategoryEdit />} />
+            </Route>
+          </Route>
+        </Route>
+        <Route path='/login' element={<Login loginStatus={loginStatus} loginHandler={loginHandler} />} />
+      </Routes>
     </>
   );
 }

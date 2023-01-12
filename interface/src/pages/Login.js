@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { userLogin } from '../axios/userAxios'
-import { Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Login = (props) => {
     const { loginStatus, loginHandler } = props
@@ -9,26 +9,26 @@ const Login = (props) => {
         password: ''
     })
 
-    const loginUser = async () => {
-        try {
-            let result = await userLogin(form)
-            const { user_token } = result.data
-            localStorage.setItem('user_token', user_token)
+    const submitHandler = (e) => {
+        e.preventDefault()
+        userLogin(form, result => {
+            localStorage.setItem('user_token', result.user_token)
             loginHandler(true)
-        } catch (error) {
-            alert(error.response.data.message)
-        }
+        })
     }
 
-    const submitHandler = () => {
-        loginUser()
-    }
+    const navigation = useNavigate()
+    useEffect(() => {
+        if (loginStatus) {
+            navigation('/')
+        }
+    }, [loginStatus, navigation])
 
     return (
         <>
             <div className='login-page text-center'>
                 <main className="form-signin w-100 m-auto">
-                    <form onSubmit={() => submitHandler()}>
+                    <form onSubmit={submitHandler}>
                         <img className="mb-4" src="/logo192.png" alt="" width="72" height="57" />
                         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 

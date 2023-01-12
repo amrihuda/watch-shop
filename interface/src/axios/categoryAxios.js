@@ -2,9 +2,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 const apiDomain = process.env.REACT_APP_API_DOMAIN || 'http://localhost:3000'
-const URL = apiDomain + '/api/brands/'
+const URL = apiDomain + '/api/categories/'
 
-const brandGet = async (cb) => {
+const categoryGet = async (cb) => {
     try {
         let result = await axios({
             method: 'GET',
@@ -16,11 +16,11 @@ const brandGet = async (cb) => {
     }
 }
 
-const brandGetById = async (id, cb) => {
+const categoryGetById = async (id, cb) => {
     try {
         let result = await axios({
             method: 'GET',
-            url: URL + 'brand/' + id
+            url: URL + 'category/' + id
         })
         cb(result.data)
     } catch (error) {
@@ -28,15 +28,12 @@ const brandGetById = async (id, cb) => {
     }
 }
 
-const brandPost = async (data, cb) => {
+const categoryPost = async (data, cb) => {
     try {
         let result = await axios({
             method: 'POST',
             url: URL,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'user_token': localStorage.getItem('user_token')
-            },
+            headers: { 'user_token': localStorage.getItem('user_token') },
             data
         })
         cb(result.data)
@@ -52,15 +49,12 @@ const brandPost = async (data, cb) => {
     }
 }
 
-const brandPut = async (id, data, cb) => {
+const categoryPut = async (id, data, cb) => {
     try {
         let result = await axios({
             method: 'PUT',
             url: URL + id,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'user_token': localStorage.getItem('user_token')
-            },
+            headers: { 'user_token': localStorage.getItem('user_token') },
             data
         })
         cb(result.data)
@@ -76,7 +70,7 @@ const brandPut = async (id, data, cb) => {
     }
 }
 
-const brandDelete = async (id, cb) => {
+const categoryDelete = async (id, cb) => {
     try {
         Swal.fire({
             title: 'Are you sure?',
@@ -90,7 +84,7 @@ const brandDelete = async (id, cb) => {
             let res = await axios({
                 method: 'DELETE',
                 url: URL + id,
-                headers: { 'user_token': localStorage.getItem('user_token') },
+                headers: { 'user_token': localStorage.getItem('user_token') }
             })
             cb(res.data)
             if (result.isConfirmed) {
@@ -107,5 +101,5 @@ const brandDelete = async (id, cb) => {
 }
 
 export {
-    brandGet, brandGetById, brandPost, brandPut, brandDelete
+    categoryGet, categoryGetById, categoryPost, categoryPut, categoryDelete
 }

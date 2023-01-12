@@ -1,5 +1,5 @@
 const { brand } = require('../models')
-
+const fs = require('fs')
 class BrandController {
     static async getAll(req, res) {
         try {
@@ -28,7 +28,23 @@ class BrandController {
             const id = +req.params.id
             const { name, desc } = req.body
 
-            let result = await brand.update({ name, desc }, { where: { id } })
+            let result = 0
+            if (req.file) {
+                let oldImage = await brand.findByPk(id)
+                let file = './uploads/' + oldImage.image
+
+                result = await brand.update({ name, desc, image: req.file.filename }, { where: { id } })
+                fs.unlink(file, (err) => {
+                    if (err) {
+                        if (err.code === 'ENOENT') {
+                            return;
+                        }
+                        throw err;
+                    }
+                })
+            } else {
+                result = await brand.update({ name, desc }, { where: { id } })
+            }
 
             result[0] === 1 ?
                 res.status(200).json({
@@ -45,8 +61,18 @@ class BrandController {
     static async delete(req, res) {
         try {
             const id = +req.params.id
-
+            let oldImage = await brand.findByPk(id)
+            let file = './uploads/' + oldImage.image
+            
             let result = await brand.destroy({ where: { id } })
+            fs.unlink(file, (err) => {
+                if (err) {
+                    if (err.code === 'ENOENT') {
+                        return;
+                    }
+                    throw err;
+                }
+            })
 
             result === 1 ?
                 res.status(200).json({

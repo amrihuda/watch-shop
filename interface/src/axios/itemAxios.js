@@ -2,9 +2,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 const apiDomain = process.env.REACT_APP_API_DOMAIN || 'http://localhost:3000'
-const URL = apiDomain + '/api/brands/'
+const URL = apiDomain + '/api/items/'
 
-const brandGet = async (cb) => {
+const itemGet = async (cb) => {
     try {
         let result = await axios({
             method: 'GET',
@@ -16,11 +16,11 @@ const brandGet = async (cb) => {
     }
 }
 
-const brandGetById = async (id, cb) => {
+const itemGetById = async (id, cb) => {
     try {
         let result = await axios({
             method: 'GET',
-            url: URL + 'brand/' + id
+            url: URL + 'item/' + id
         })
         cb(result.data)
     } catch (error) {
@@ -28,31 +28,27 @@ const brandGetById = async (id, cb) => {
     }
 }
 
-const brandPost = async (data, cb) => {
-    try {
-        let result = await axios({
-            method: 'POST',
-            url: URL,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'user_token': localStorage.getItem('user_token')
-            },
-            data
-        })
-        cb(result.data)
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    } catch (error) {
-        console.log(error)
-    }
+const itemPost = async (data, cb) => {
+    let result = await axios({
+        method: 'POST',
+        url: URL,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'user_token': localStorage.getItem('user_token')
+        },
+        data
+    })
+    cb(result.data)
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
 }
 
-const brandPut = async (id, data, cb) => {
+const itemPut = async (id, data, cb) => {
     try {
         let result = await axios({
             method: 'PUT',
@@ -76,7 +72,7 @@ const brandPut = async (id, data, cb) => {
     }
 }
 
-const brandDelete = async (id, cb) => {
+const itemDelete = async (id, cb) => {
     try {
         Swal.fire({
             title: 'Are you sure?',
@@ -90,7 +86,7 @@ const brandDelete = async (id, cb) => {
             let res = await axios({
                 method: 'DELETE',
                 url: URL + id,
-                headers: { 'user_token': localStorage.getItem('user_token') },
+                headers: { 'user_token': localStorage.getItem('user_token') }
             })
             cb(res.data)
             if (result.isConfirmed) {
@@ -107,5 +103,5 @@ const brandDelete = async (id, cb) => {
 }
 
 export {
-    brandGet, brandGetById, brandPost, brandPut, brandDelete
+    itemGet, itemGetById, itemPost, itemPut, itemDelete
 }

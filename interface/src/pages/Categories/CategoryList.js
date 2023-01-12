@@ -1,45 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { brandGet, brandDelete } from '../../axios/brandAxios'
+import { categoryGet, categoryDelete } from '../../axios/categoryAxios'
 import LoadingBar from '../../helpers/LoadingBar'
 
-const BrandList = () => {
-    const [brands, setBrands] = useState([])
+const CategoryList = () => {
+    const [categories, setCategories] = useState([])
 
     useEffect(() => {
-        brandGet(result => setBrands(result))
-    }, [brands])
+        categoryGet(result => setCategories(result))
+    }, [])
 
     const deleteHandler = (id) => {
-        brandDelete(id)
-        brandGet(result => setBrands(result))
+        categoryDelete(id, () => {
+            categoryGet(result => setCategories(result))
+        })
     }
 
     return (
         <>
-            <Link to='create' className='btn btn-sm btn-primary'>Add Brand</Link>
+            <Link to='create' className='btn btn-sm btn-primary'>Add Category</Link>
             {
-                brands.length > 0 ?
+                categories.length > 0 ?
                     <table className="table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Desc</th>
-                                <th>Image</th>
                                 <th>Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                brands.map(brand => {
-                                    const { id, name, desc, image } = brand
+                                categories.map(category => {
+                                    const { id, name } = category
                                     return (
                                         <tr key={id}>
                                             <td>{id}</td>
                                             <td>{name}</td>
-                                            <td>{desc}</td>
-                                            <td>{image}</td>
                                             <td>
                                                 <Link to={`edit/${id}`} className='btn btn-sm btn-info'>Edit</Link>
                                                 <button onClick={() => deleteHandler(id)} className='btn btn-sm btn-danger'>Delete</button>
@@ -57,4 +54,4 @@ const BrandList = () => {
     )
 }
 
-export default BrandList
+export default CategoryList

@@ -1,5 +1,5 @@
 const { item } = require('../models')
-const { verifyToken } = require('../helpers/jsonwebtoken')
+const fs = require('fs')
 
 class ItemController {
     static async getAll(req, res) {
@@ -28,13 +28,32 @@ class ItemController {
     static async update(req, res) {
         try {
             const id = +req.params.id
-            const { name, desc, price, stock, image, categoryId, brandId } = req.body
+            const { name, desc, price, stock, categoryId, brandId } = req.body
             const userId = +req.userData.id
 
-            let result = await item.update(
-                { name, desc, price, stock, image, userId, categoryId, brandId },
-                { where: { id } }
-            )
+            let result = 0
+            if (req.file) {
+                let oldImage = await item.findByPk(id)
+                let file = './uploads/' + oldImage.image
+
+                result = await item.update(
+                    { name, desc, price, stock, image: req.file.filename, userId, categoryId, brandId },
+                    { where: { id } }
+                )
+                fs.unlink(file, (err) => {
+                    if (err) {
+                        if (err.code === 'ENOENT') {
+                            return;
+                        }
+                        throw err;
+                    }
+                })
+            } else {
+                result = await item.update(
+                    { name, desc, price, stock, userId, categoryId, brandId },
+                    { where: { id } }
+                )
+            }
 
             result[0] === 1 ?
                 res.status(200).json({
@@ -51,8 +70,18 @@ class ItemController {
     static async delete(req, res) {
         try {
             const id = +req.params.id
+            let oldImage = await item.findByPk(id)
+            let file = './uploads/' + oldImage.image
 
             let result = await item.destroy({ where: { id } })
+            fs.unlink(file, (err) => {
+                if (err) {
+                    if (err.code === 'ENOENT') {
+                        return;
+                    }
+                    throw err;
+                }
+            })
 
             result === 1 ?
                 res.status(200).json({

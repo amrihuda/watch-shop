@@ -1,14 +1,27 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
-const apiDomain = process.env.API_DOMAIN || 'http://localhost:3000'
+const apiDomain = process.env.REACT_APP_API_DOMAIN || 'http://localhost:3000'
 const URL = apiDomain + '/api/users'
 
-const userLogin = (data) => {
-    return axios({
-        method: 'POST',
-        url: URL + '/login',
-        data
-    })
+const userLogin = async (data, cb) => {
+    try {
+        let result = await axios({
+            method: 'POST',
+            url: URL + '/login',
+            data
+        })
+        cb(result.data)
+    } catch (error) {
+        console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 }
 
 const userPost = (data) => {

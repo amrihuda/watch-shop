@@ -27,7 +27,7 @@ const Navbar = (props) => {
                     <div className="collapse navbar-collapse col-lg-auto justify-content-center" id="navbarSupportedContent">
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li><Link to="/" className="nav-link px-2 link-secondary">Home</Link></li>
-                            <li><Link to="#" className="nav-link px-2 link-dark">Features</Link></li>
+                            <li><Link to="/categories" className="nav-link px-2 link-dark">Categories</Link></li>
                             <li><Link to="/brands" className="nav-link px-2 link-dark">Brands</Link></li>
                             <li><Link to="#" className="nav-link px-2 link-dark">FAQs</Link></li>
                             <li><Link to="#" className="nav-link px-2 link-dark">About</Link></li>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Home = (props) => {
-    const { loginStatus, loginHandler } = props
+    const { loginStatus } = props
 
     return (
         <>

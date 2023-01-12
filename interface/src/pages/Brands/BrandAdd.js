@@ -12,10 +12,11 @@ const BrandAdd = () => {
     const navigation = useNavigate()
 
     const submitHandler = () => {
-        brandPost(form)
-        navigation('/brands')
+        brandPost(form, () => {
+            navigation('/brands')
+        })
     }
-    
+
     return (
         <>
             <form>
@@ -31,11 +32,11 @@ const BrandAdd = () => {
                         onChange={(e) => setForm({ ...form, desc: e.target.value })}
                         type="text" className="form-control" />
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Image</label>
+                <div class="mb-3">
+                    <label class="form-label">Image</label>
                     <input
-                        onChange={(e) => setForm({ ...form, image: e.target.value })}
-                        type="text" className="form-control" />
+                        onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
+                        class="form-control" type="file" />
                 </div>
                 <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
             </form>

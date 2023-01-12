@@ -22,12 +22,13 @@ const BrandEdit = () => {
                 image
             })
         })
-    }, [])
+    }, [id])
 
 
     const submitHandler = () => {
-        brandPut(id, form)
-        navigation('/brands')
+        brandPut(id, form, () => {
+            navigation('/brands')
+        })
     }
 
     return (
@@ -47,12 +48,11 @@ const BrandEdit = () => {
                         onChange={(e) => setForm({ ...form, desc: e.target.value })}
                         type="text" className="form-control" />
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Image</label>
+                <div class="mb-3">
+                    <label class="form-label">Image</label>
                     <input
-                        value={form.image}
-                        onChange={(e) => setForm({ ...form, image: e.target.value })}
-                        type="text" className="form-control" />
+                        onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
+                        class="form-control" type="file" />
                 </div>
                 <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
             </form>

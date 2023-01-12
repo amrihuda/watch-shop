@@ -5,7 +5,7 @@ const upload = require('../middlewares/multer')
 
 brandRoute.get('/', BrandController.getAll)
 brandRoute.post('/', auth, upload('brand').single('image'), BrandController.create)
-brandRoute.put('/:id', auth, BrandController.update)
+brandRoute.put('/:id', auth, upload('brand').single('image'), BrandController.update)
 brandRoute.delete('/:id', auth, BrandController.delete)
 brandRoute.get('/brand/:id', BrandController.getById)
 
