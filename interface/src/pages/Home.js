@@ -6,8 +6,14 @@ import { brandGet } from '../axios/brandAxios'
 import { categoryGet } from '../axios/categoryAxios'
 
 const Home = (props) => {
+    const { loginStatus, searchKey } = props
     const [brands, setBrands] = useState([])
     const [categories, setCategories] = useState([])
+    const [manyItems, setManyItems] = useState(5)
+
+    const seeMoreHandler = () => {
+        setManyItems(manyItems + 5)
+    }
 
     useEffect(() => {
         brandGet(result => setBrands(result))
@@ -38,7 +44,7 @@ const Home = (props) => {
                 </button>
             </div>
             <h3 className='mt-4'>Brands</h3>
-            <div className='my-4'>
+            <div className='my-4 position-relative'>
                 {brands.length > 0 ?
                     <div className="row row-cols-1 row-cols-md-4 g-4 text-center">
                         {
@@ -61,7 +67,7 @@ const Home = (props) => {
                 }
             </div>
             <h3 className='mt-4'>Categories</h3>
-            <div className='my-4'>
+            <div className='my-4 position-relative'>
                 {
                     categories.length > 0 ?
                         <div className="row row-cols-1 row-cols-md-4 g-4 text-center">
@@ -85,7 +91,10 @@ const Home = (props) => {
                 }
             </div>
 
-            <ItemList />
+            <div className='position-relative'>
+                <ItemList loginStatus={loginStatus} manyItems={manyItems} searchKey={searchKey} />
+                <button className='btn btn-md btn-primary mt-4 d-flex mx-auto' onClick={() => seeMoreHandler()}>SEE MORE</button>
+            </div>
         </>
     )
 }

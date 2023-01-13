@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { brandGet, brandDelete } from '../../axios/brandAxios'
 import LoadingBar from '../../helpers/LoadingBar'
 
-const BrandList = () => {
+const BrandList = (props) => {
     const [brands, setBrands] = useState([])
+    const { loginStatus, searchKey } = props
 
     useEffect(() => {
         brandGet(result => setBrands(result))
@@ -17,7 +18,8 @@ const BrandList = () => {
 
     return (
         <>
-            <Link to='create' className='btn btn-sm btn-primary'>Add Brand</Link>
+            <h3>Brands</h3>
+            {loginStatus ? <Link to='create' className='btn btn-sm btn-primary'>Add Brand</Link> : <></>}
             {
                 brands.length > 0 ?
                     <table className="table">
@@ -27,12 +29,12 @@ const BrandList = () => {
                                 <th>Name</th>
                                 <th>Desc</th>
                                 <th>Image</th>
-                                <th className='text-end'>Options</th>
+                                {loginStatus ? <th className='text-end'>Options</th> : <></>}
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                brands.map((brand, i) => {
+                                brands.filter((el) => el.name.toLowerCase().includes(searchKey.toLowerCase())).map((brand, i) => {
                                     const { id, name, desc, image } = brand
                                     return (
                                         <tr key={id}>
@@ -40,10 +42,13 @@ const BrandList = () => {
                                             <td>{name}</td>
                                             <td>{desc}</td>
                                             <td>{image}</td>
-                                            <td className='text-end'>
-                                                <Link to={`edit/${id}`} className='btn btn-sm btn-info'>Edit</Link>
-                                                <button onClick={() => deleteHandler(id)} className='btn btn-sm btn-danger'>Delete</button>
-                                            </td>
+                                            {loginStatus ?
+                                                <td className='text-end'>
+                                                    <Link to={`edit/${id}`} className='btn btn-sm btn-info'>Edit</Link>
+                                                    <button onClick={() => deleteHandler(id)} className='btn btn-sm btn-danger'>Delete</button>
+                                                </td> : <></>
+                                            }
+
                                         </tr>
                                     )
                                 })

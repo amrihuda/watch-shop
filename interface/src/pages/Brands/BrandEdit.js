@@ -25,7 +25,8 @@ const BrandEdit = () => {
     }, [id])
 
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
+        e.preventDefault()
         brandPut(id, form, () => {
             navigation('/brands')
         })
@@ -33,7 +34,8 @@ const BrandEdit = () => {
 
     return (
         <>
-            <form>
+            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+                <h3>Edit Brand</h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input
@@ -54,7 +56,7 @@ const BrandEdit = () => {
                         onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
                         className="form-control" type="file" />
                 </div>
-                <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </>
     )

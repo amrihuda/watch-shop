@@ -19,7 +19,8 @@ const ItemAdd = () => {
 
     const navigation = useNavigate()
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
+        e.preventDefault()
         itemPost(form, () => {
             navigation('/items')
         })
@@ -32,7 +33,8 @@ const ItemAdd = () => {
 
     return (
         <>
-            <form>
+            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+                <h3>Add Item</h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input
@@ -97,7 +99,7 @@ const ItemAdd = () => {
                         }
                     </select>
                 </div>
-                <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </>
     )

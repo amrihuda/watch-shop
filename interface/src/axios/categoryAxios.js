@@ -46,6 +46,13 @@ const categoryPost = async (data, cb) => {
         })
     } catch (error) {
         console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 }
 
@@ -67,6 +74,13 @@ const categoryPut = async (id, data, cb) => {
         })
     } catch (error) {
         console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 }
 
@@ -97,6 +111,13 @@ const categoryDelete = async (id, cb) => {
         })
     } catch (error) {
         console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 }
 

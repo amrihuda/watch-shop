@@ -29,7 +29,7 @@ const Login = (props) => {
             <div className='login-page text-center'>
                 <main className="form-signin w-100 m-auto">
                     <form onSubmit={submitHandler}>
-                        <img className="mb-4" src="/logo192.png" alt="" width="72" height="72" />
+                        <img className="mb-4" src="/watch.png" alt="" width="72" height="72" />
                         <h1 className="h3 mb-3 fw-normal">Sign up</h1>
 
                         <div className="form-floating">

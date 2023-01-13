@@ -36,14 +36,16 @@ const ItemEdit = () => {
         })
     }, [id])
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
+        e.preventDefault()
         itemPut(id, form, () => {
             navigation('/items')
         })
     }
     return (
         <>
-            <form>
+            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+                <h3>Edit Item</h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input
@@ -111,7 +113,7 @@ const ItemEdit = () => {
                         }
                     </select>
                 </div>
-                <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </>
     )

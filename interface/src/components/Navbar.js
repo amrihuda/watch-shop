@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
-    const { loginStatus, loginHandler } = props
+    const { loginStatus, loginHandler, searchHandler } = props
 
     const handler = () => {
         if (loginStatus) {
@@ -12,6 +12,7 @@ const Navbar = (props) => {
             loginHandler(true)
         }
     }
+
     return (
         <>
             <div className='sticky-top'>
@@ -28,9 +29,9 @@ const Navbar = (props) => {
                         <div className="collapse navbar-collapse col-lg-auto justify-content-center" id="navbarSupportedContent">
                             <ul className="navbar-nav mb-2 mb-lg-0">
                                 <li><Link to="/" className="nav-link px-2 link-theme-1">Home</Link></li>
+                                <li><Link to="/items" className="nav-link px-2 link-theme-1">Watches</Link></li>
                                 <li><Link to="/categories" className="nav-link px-2 link-theme-1">Categories</Link></li>
                                 <li><Link to="/brands" className="nav-link px-2 link-theme-1">Brands</Link></li>
-                                <li><Link to="#" className="nav-link px-2 link-theme-1">FAQs</Link></li>
                                 <li><Link to="#" className="nav-link px-2 link-theme-1">About</Link></li>
                             </ul>
                         </div>
@@ -59,9 +60,11 @@ const Navbar = (props) => {
                 </nav>
                 <header className="py-2 mb-4 border-bottom bg-theme-1">
                     <div className="container d-flex flex-wrap justify-content-center">
-                        <form className="col-12" role="search">
-                            <input type="search" className="form-control bg-theme-2" placeholder="Search..." aria-label="Search" />
-                        </form>
+                        <div className="col-12" role="search">
+                            <input
+                                onChange={(e) => searchHandler(e.target.value)}
+                                type="search" className="form-control bg-theme-2" placeholder="Search..." aria-label="Search" />
+                        </div>
                     </div>
                 </header>
             </div>

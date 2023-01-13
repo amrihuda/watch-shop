@@ -18,7 +18,8 @@ const CategoryAdd = () => {
 
     return (
         <>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+                <h3>Add Category</h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input

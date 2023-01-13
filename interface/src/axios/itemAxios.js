@@ -29,23 +29,34 @@ const itemGetById = async (id, cb) => {
 }
 
 const itemPost = async (data, cb) => {
-    let result = await axios({
-        method: 'POST',
-        url: URL,
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'user_token': localStorage.getItem('user_token')
-        },
-        data
-    })
-    cb(result.data)
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-    })
+    try {
+        let result = await axios({
+            method: 'POST',
+            url: URL,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'user_token': localStorage.getItem('user_token')
+            },
+            data
+        })
+        cb(result.data)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    } catch (error) {
+        console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 }
 
 const itemPut = async (id, data, cb) => {
@@ -69,6 +80,13 @@ const itemPut = async (id, data, cb) => {
         })
     } catch (error) {
         console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 }
 
@@ -99,6 +117,13 @@ const itemDelete = async (id, cb) => {
         })
     } catch (error) {
         console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 }
 

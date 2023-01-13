@@ -11,7 +11,8 @@ const BrandAdd = () => {
 
     const navigation = useNavigate()
 
-    const submitHandler = () => {
+    const submitHandler = (e) => {
+        e.preventDefault()
         brandPost(form, () => {
             navigation('/brands')
         })
@@ -19,7 +20,8 @@ const BrandAdd = () => {
 
     return (
         <>
-            <form>
+            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+                <h3>Add Brand</h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input
@@ -38,7 +40,7 @@ const BrandAdd = () => {
                         onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
                         className="form-control" type="file" />
                 </div>
-                <button onClick={() => submitHandler()} type="button" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </>
     )

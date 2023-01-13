@@ -16,9 +16,14 @@ import {
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false)
+  const [searchKey, setSearchKey] = useState('')
 
   const loginHandler = (result) => {
     setLoginStatus(result)
+  }
+
+  const searchHandler = (result) => {
+    setSearchKey(result)
   }
 
   useEffect(() => {
@@ -32,24 +37,24 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Main loginStatus={loginStatus} loginHandler={loginHandler} />} >
-          <Route path='' element={<Home loginStatus={loginStatus} loginHandler={loginHandler} />} />
+        <Route path="/" element={<Main loginStatus={loginStatus} loginHandler={loginHandler} searchHandler={searchHandler} />} >
+          <Route path='' element={<Home loginStatus={loginStatus} searchKey={searchKey} />} />
           <Route path='items' element={<Item />}>
-            <Route path='' element={<ItemList />} />
+            <Route path='' element={<ItemList loginStatus={loginStatus} searchKey={searchKey} />} />
             <Route path='create' element={<ItemAdd />} />
             <Route path='edit'>
               <Route path=':id' element={<ItemEdit />} />
             </Route>
           </Route>
           <Route path='brands' element={<Brand />}>
-            <Route path='' element={<BrandList />} />
+            <Route path='' element={<BrandList loginStatus={loginStatus} searchKey={searchKey} />} />
             <Route path='create' element={<BrandAdd />} />
             <Route path='edit'>
               <Route path=':id' element={<BrandEdit />} />
             </Route>
           </Route>
           <Route path='categories' element={<Category />}>
-            <Route path='' element={<CategoryList />} />
+            <Route path='' element={<CategoryList loginStatus={loginStatus} searchKey={searchKey} />} />
             <Route path='create' element={<CategoryAdd />} />
             <Route path='edit'>
               <Route path=':id' element={<CategoryEdit />} />
