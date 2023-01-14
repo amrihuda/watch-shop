@@ -53,8 +53,9 @@ body {
     -webkit-box-orient: vertical;
 }
 
-.carousel {
+.carousel-item img {
     height: 72vh;
+    object-fit: cover;
 }
 
 .navbar {

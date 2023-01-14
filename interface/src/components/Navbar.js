@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
-    const { loginStatus, loginHandler, searchHandler } = props
+    const { loginStatus, loginHandler, imageURL, searchHandler } = props
 
     const handler = () => {
         if (loginStatus) {
@@ -12,7 +12,7 @@ const Navbar = (props) => {
             loginHandler(true)
         }
     }
-
+    
     return (
         <>
             <div className='sticky-top'>
@@ -44,12 +44,13 @@ const Navbar = (props) => {
                                 </> :
                                 <div className="dropdown d-inline-block">
                                     <Link to="#" className="d-block text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />
+                                        <img src={imageURL} alt="..." width="32" height="32" className="rounded-circle"
+                                            onError={(e) => { e.target.onerror = null; e.target.src = '/logo192.png' }} />
                                     </Link>
                                     <ul className="dropdown-menu dropdown-menu-end text-small">
                                         <li><Link className="dropdown-item" to="#">New project...</Link></li>
                                         <li><Link className="dropdown-item" to="#">Settings</Link></li>
-                                        <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                                        <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
                                         <li><Link onClick={() => handler()} className="dropdown-item" to="#">Sign out</Link></li>
                                     </ul>

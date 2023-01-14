@@ -2,13 +2,22 @@ const { user } = require('../models')
 const { encryptPwd, decryptPwd } = require('../helpers/bcrypt')
 const { Op } = require("sequelize")
 const { generateToken } = require('../helpers/jsonwebtoken')
-
+const fs = require('fs')
 class UserController {
     static async getAll(req, res) {
         try {
-            let users = await user.findAll()
+            const id = +req.userData.id
 
-            res.status(200).json(users)
+            if (id === 1) {
+                let users = await user.findAll()
+
+                res.status(200).json(users)
+            } else {
+                res.status(403).json({
+                    message: `User id ${id} does not have access for this request!`
+                })
+            }
+
         } catch (error) {
             res.status(500).json(error)
         }
@@ -56,17 +65,40 @@ class UserController {
     static async update(req, res) {
         try {
             const id = +req.params.id
-            const { username, email, password } = req.body
+            const { username, email, password, age } = req.body
+            const userId = +req.userData.id
 
-            let result = await user.update({ username, email, password }, { where: { id } })
+            if (userId === 1) {
+                let result = 0
+                if (req.file) {
+                    let oldImage = await user.findByPk(id)
+                    let file = './uploads/' + oldImage.image
 
-            result[0] === 1 ?
-                res.status(200).json({
-                    message: `User id ${id} updated successfully!`
-                }) :
-                res.status(404).json({
-                    message: `User id ${id} not updated successfully!`
+                    result = await user.update({ username, email, password, image: req.file.filename, age }, { where: { id }, individualHooks: true })
+                    fs.unlink(file, (err) => {
+                        if (err) {
+                            if (err.code === 'ENOENT') {
+                                return;
+                            }
+                            throw err;
+                        }
+                    })
+                } else {
+                    result = await user.update({ username, email, password, age }, { where: { id }, individualHooks: true })
+                }
+
+                result[0] === 1 ?
+                    res.status(200).json({
+                        message: `User id ${id} updated successfully!`
+                    }) :
+                    res.status(404).json({
+                        message: `User id ${id} not updated successfully!`
+                    })
+            } else {
+                res.status(403).json({
+                    message: `User id ${id} does not have access for this request!`
                 })
+            }
         } catch (error) {
             res.status(500).json(error)
         }
@@ -75,16 +107,23 @@ class UserController {
     static async delete(req, res) {
         try {
             const id = +req.params.id
+            const userId = +req.userData.id
 
-            let result = await user.destroy({ where: { id } })
+            if (userId === 1) {
+                let result = await user.destroy({ where: { id } })
 
-            result === 1 ?
-                res.status(200).json({
-                    message: `User id ${id} deleted successfully!`
-                }) :
-                res.status(404).json({
-                    message: `User id ${id} not deleted successfully!`
+                result === 1 ?
+                    res.status(200).json({
+                        message: `User id ${id} deleted successfully!`
+                    }) :
+                    res.status(404).json({
+                        message: `User id ${id} not deleted successfully!`
+                    })
+            } else {
+                res.status(403).json({
+                    message: `User id ${id} does not have access for this request!`
                 })
+            }
         } catch (error) {
             res.status(500).json(error)
         }
@@ -93,10 +132,66 @@ class UserController {
     static async getById(req, res) {
         try {
             const id = +req.params.id
-            
+            const userId = +req.userData.id
+
+            if (userId === 1) {
+                let result = await user.findByPk(id)
+
+                res.status(200).json(result)
+            } else {
+                res.status(403).json({
+                    message: `User id ${id} does not have access for this request!`
+                })
+            }
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
+
+
+
+    static async getByIdUser(req, res) {
+        try {
+            const id = +req.userData.id
+
             let result = await user.findByPk(id)
 
             res.status(200).json(result)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
+
+    static async updateUser(req, res) {
+        try {
+            const id = +req.userData.id
+            const { username, email, password, age } = req.body
+
+            let result = 0
+            if (req.file) {
+                let oldImage = await user.findByPk(id)
+                let file = './uploads/' + oldImage.image
+
+                result = await user.update({ username, email, password, image: req.file.filename, age }, { where: { id }, individualHooks: true })
+                fs.unlink(file, (err) => {
+                    if (err) {
+                        if (err.code === 'ENOENT') {
+                            return;
+                        }
+                        throw err;
+                    }
+                })
+            } else {
+                result = await user.update({ username, email, password, age }, { where: { id }, individualHooks: true })
+            }
+
+            result[0] === 1 ?
+                res.status(200).json({
+                    message: `User id ${id} updated successfully!`
+                }) :
+                res.status(404).json({
+                    message: `User id ${id} not updated successfully!`
+                })
         } catch (error) {
             res.status(500).json(error)
         }

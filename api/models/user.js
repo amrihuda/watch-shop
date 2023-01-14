@@ -49,6 +49,11 @@ module.exports = (sequelize, DataTypes) => {
         user.password = encryptPwd(user.password)
         user.image = user.image || "user.png"
         user.age = user.age || 0
+      },
+      beforeUpdate: function (user, options) {
+        if (user.password !== user.previous('password')) {
+          user.password = encryptPwd(user.password)
+        }
       }
     },
     sequelize,

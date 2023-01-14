@@ -35,20 +35,20 @@ const Login = (props) => {
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, username: e.target.value })}
-                                type="text" className="form-control" id="floatingUsername" placeholder="username" />
-                            <label for="floatingUsername">Username</label>
+                                type="text" className="form-control" placeholder="username" />
+                            <label>Username</label>
                         </div>
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-                            <label for="floatingInput">Email address</label>
+                                type="email" className="form-control" placeholder="name@example.com" />
+                            <label>Email address</label>
                         </div>
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, password: e.target.value })}
-                                type="password" className="form-control" id="floatingPassword" placeholder="password" />
-                            <label for="floatingPassword">Password</label>
+                                type="password" className="form-control" placeholder="password" />
+                            <label>Password</label>
                         </div>
 
                         <button className="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>

@@ -24,6 +24,19 @@ const userLogin = async (data, cb) => {
     }
 }
 
+const userGetById = async (cb) => {
+    try {
+        let result = await axios({
+            method: 'GET',
+            url: URL + '/user',
+            headers: { 'user_token': localStorage.getItem('user_token') },
+        })
+        cb(result.data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const userPost = async (data, cb) => {
     try {
         let result = await axios({
@@ -44,22 +57,37 @@ const userPost = async (data, cb) => {
     }
 }
 
-const userPut = (data) => {
-    return axios({
-        method: 'PUT',
-        url: URL,
-        data
-    })
-}
-
-const userDelete = (data) => {
-    return axios({
-        method: 'DELETE',
-        url: URL,
-        data
-    })
+const userPut = async (data, cb) => {
+    try {
+        let result = await axios({
+            method: 'PUT',
+            url: URL + '/user/update',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'user_token': localStorage.getItem('user_token')
+            },
+            data
+        })
+        cb(result.data)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    } catch (error) {
+        console.log(error)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 }
 
 export {
-    userLogin, userPost, userPut, userDelete
+    userLogin, userPost, userPut, userGetById
 }

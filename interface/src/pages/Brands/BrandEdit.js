@@ -15,11 +15,10 @@ const BrandEdit = () => {
 
     useEffect(() => {
         brandGetById(id, result => {
-            const { name, desc, image } = result
+            const { name, desc } = result
             setForm({
                 name,
                 desc,
-                image
             })
         })
     }, [id])

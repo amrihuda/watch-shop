@@ -20,9 +20,13 @@ import CategoryList from './Categories/CategoryList'
 import CategoryAdd from './Categories/CategoryAdd'
 import CategoryEdit from './Categories/CategoryEdit'
 
+// User
+import UserEdit from './Users/UserEdit'
+
 export {
     Home, Login, Register,
     Item, ItemList, ItemAdd, ItemEdit,
     Brand, BrandList, BrandAdd, BrandEdit,
-    Category, CategoryList, CategoryAdd, CategoryEdit
+    Category, CategoryList, CategoryAdd, CategoryEdit,
+    UserEdit
 }

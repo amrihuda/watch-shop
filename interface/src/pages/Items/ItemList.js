@@ -11,6 +11,7 @@ const ItemList = (props) => {
     const { loginStatus, manyItems, searchKey } = props
 
     const location = useLocation()
+    const apiDomain = process.env.REACT_APP_API_DOMAIN
 
     useEffect(() => {
         itemGet(result => setItem(result))
@@ -22,11 +23,9 @@ const ItemList = (props) => {
         })
     }
 
-    const apiDomain = process.env.REACT_APP_API_DOMAIN
-
     return (
         <>
-            <div class="d-flex justify-content-between align-items-center">
+            <div className="d-flex justify-content-between align-items-center">
                 <h3>Watches</h3>
                 {location.pathname === '/' ?
                     <Link to='/items' className='btn btn-sm btn-outline-primary'>SEE ALL</Link> : <></>}
