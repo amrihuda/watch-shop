@@ -30,21 +30,21 @@ const UserEdit = (props) => {
 
     return (
         <>
-            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+            <form onSubmit={submitHandler} className='col-lg-6 mx-auto'>
                 <h3>Edit Brand</h3>
                 <div className="mb-3">
                     <label className="form-label">Username</label>
                     <input
                         value={form.username}
                         onChange={(e) => setForm({ ...form, username: e.target.value })}
-                        type="text" className="form-control" />
+                        type="text" className="form-control" required />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Email Address</label>
                     <input
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        type="email" className="form-control" />
+                        type="email" className="form-control" required />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">New Password</label>

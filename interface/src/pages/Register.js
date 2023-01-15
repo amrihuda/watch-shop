@@ -35,24 +35,24 @@ const Login = (props) => {
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, username: e.target.value })}
-                                type="text" className="form-control" placeholder="username" />
+                                type="text" className="form-control" placeholder="username" required />
                             <label>Username</label>
                         </div>
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                type="email" className="form-control" placeholder="name@example.com" />
+                                type="email" className="form-control" placeholder="name@example.com" required />
                             <label>Email address</label>
                         </div>
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, password: e.target.value })}
-                                type="password" className="form-control" placeholder="password" />
+                                type="password" className="form-control" placeholder="password" required />
                             <label>Password</label>
                         </div>
 
                         <button className="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
-                        <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+                        <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
                     </form>
                 </main>
             </div>

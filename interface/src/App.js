@@ -35,11 +35,14 @@ function App() {
   const watchesList = useRef(null)
   const searchHandler = (result) => {
     setSearchKey(result)
-    window.scrollTo({
-      top: watchesList.current?.offsetTop,
-      left: 0,
-      behavior: "smooth",
-    });
+    const windowTop = watchesList.current?.offsetTop - 130
+    if (window.pageYOffset < windowTop) {
+      window.scrollTo({
+        top: windowTop,
+        left: 0,
+        behavior: "smooth",
+      })
+    }
   }
 
   useEffect(() => {

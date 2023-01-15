@@ -33,7 +33,7 @@ const ItemList = (props) => {
             {loginStatus ? <Link to='/items/create' className='btn btn-sm btn-primary'>Add Item</Link> : <></>}
             {
                 items.length > 0 ?
-                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div className="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-3">
                         {
                             items.filter((el) => el.name.toLowerCase().includes(searchKey.toLowerCase())).slice(0, manyItems).map((item, i) => {
                                 const { id, name, price, image, user, category } = item

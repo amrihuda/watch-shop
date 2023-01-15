@@ -35,13 +35,13 @@ const Login = (props) => {
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, usernameOrEmail: e.target.value })}
-                                type="text" className="form-control" placeholder="username or name@example.com" />
+                                type="text" className="form-control" placeholder="username or name@example.com" required />
                             <label>Username or Email</label>
                         </div>
                         <div className="form-floating">
                             <input
                                 onChange={(e) => setForm({ ...form, password: e.target.value })}
-                                type="password" className="form-control" placeholder="password" />
+                                type="password" className="form-control" placeholder="password" required />
                             <label>Password</label>
                         </div>
 

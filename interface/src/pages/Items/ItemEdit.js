@@ -44,7 +44,7 @@ const ItemEdit = () => {
     }
     return (
         <>
-            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+            <form onSubmit={submitHandler} className='col-lg-6 mx-auto'>
                 <h3>Edit Item</h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>

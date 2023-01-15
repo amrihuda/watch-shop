@@ -33,14 +33,14 @@ const BrandEdit = () => {
 
     return (
         <>
-            <form onSubmit={submitHandler} className='w-50 mx-auto'>
+            <form onSubmit={submitHandler} className='col-lg-6 mx-auto'>
                 <h3>Edit Brand</h3>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        type="text" className="form-control" />
+                        type="text" className="form-control" required />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Description</label>

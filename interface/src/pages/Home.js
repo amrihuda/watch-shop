@@ -61,7 +61,7 @@ const Home = (props) => {
             </div>
             <div className='mt-1 mb-4 position-relative'>
                 {brands.length > 0 ?
-                    <div className="row row-cols-1 row-cols-md-4 g-4 text-center">
+                    <div className="row row-cols-2 row-cols-md-4 g-4 text-center">
                         {
                             brands.slice(0, 8).map(brand => {
                                 const { id, name, image } = brand
@@ -95,7 +95,7 @@ const Home = (props) => {
             <div className='mt-1 mb-4 position-relative'>
                 {
                     categories.length > 0 ?
-                        <div className="row row-cols-1 row-cols-md-4 g-4 text-center">
+                        <div className="row row-cols-2 row-cols-md-4 g-4 text-center">
                             {
                                 categories.slice(0, 4).map(category => {
                                     return (
