@@ -26,9 +26,9 @@ const CategoryList = (props) => {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th style={{ width: '5%' }}>#</th>
                                 <th>Name</th>
-                                {loginStatus ? <th className='text-end'>Options</th> : <></>}
+                                {loginStatus ? <th className='text-end col-1 col-lg-auto'>Options</th> : <></>}
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +42,8 @@ const CategoryList = (props) => {
                                             {loginStatus ?
 
                                                 <td className='text-end'>
-                                                    <Link to={`edit/${id}`} className='btn btn-sm btn-info'>Edit</Link>
-                                                    <button onClick={() => deleteHandler(id)} className='btn btn-sm btn-danger'>Delete</button>
+                                                    <Link to={`edit/${id}`} className='btn btn-sm btn-info col-12 col-lg-auto'>Edit</Link>
+                                                    <button onClick={() => deleteHandler(id)} className='btn btn-sm btn-danger col-12 col-lg-auto'>Delete</button>
                                                 </td> : <></>
                                             }
                                         </tr>

@@ -1,12 +1,14 @@
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
+import About from './About'
 
 // Item
 import Item from './Items/Item'
 import ItemList from './Items/ItemList'
 import ItemAdd from './Items/ItemAdd'
 import ItemEdit from './Items/ItemEdit'
+import ItemDetails from './Items/ItemDetails'
 
 // Brand
 import Brand from './Brands/Brand'
@@ -24,8 +26,8 @@ import CategoryEdit from './Categories/CategoryEdit'
 import UserEdit from './Users/UserEdit'
 
 export {
-    Home, Login, Register,
-    Item, ItemList, ItemAdd, ItemEdit,
+    Home, Login, Register, About,
+    Item, ItemList, ItemAdd, ItemEdit, ItemDetails,
     Brand, BrandList, BrandAdd, BrandEdit,
     Category, CategoryList, CategoryAdd, CategoryEdit,
     UserEdit

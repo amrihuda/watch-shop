@@ -95,13 +95,13 @@ const categoryDelete = async (id, cb) => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then(async (result) => {
-            let res = await axios({
-                method: 'DELETE',
-                url: URL + id,
-                headers: { 'user_token': localStorage.getItem('user_token') }
-            })
-            cb(res.data)
             if (result.isConfirmed) {
+                let res = await axios({
+                    method: 'DELETE',
+                    url: URL + id,
+                    headers: { 'user_token': localStorage.getItem('user_token') }
+                })
+                cb(res.data)
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',

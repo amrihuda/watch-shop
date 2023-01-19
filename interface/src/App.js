@@ -8,11 +8,11 @@ import './App.css';
 import { Main } from './components'
 
 import {
-  Home, Login, Register,
-  Item, ItemList, ItemAdd, ItemEdit,
+  Home, Login, Register, About,
+  Item, ItemList, ItemAdd, ItemEdit, ItemDetails,
   Brand, BrandList, BrandAdd, BrandEdit,
   Category, CategoryList, CategoryAdd, CategoryEdit,
-  UserEdit
+  UserEdit,
 } from './pages'
 import { userGetById } from './axios/userAxios';
 
@@ -62,25 +62,21 @@ function App() {
           <Route path='items' element={<Item />}>
             <Route path='' element={<ItemList loginStatus={loginStatus} searchKey={searchKey} />} />
             <Route path='create' element={<ItemAdd />} />
-            <Route path='edit'>
-              <Route path=':id' element={<ItemEdit />} />
-            </Route>
+            <Route path='edit/:id' element={<ItemEdit />} />
+            <Route path='details/:id' element={<ItemDetails loginStatus={loginStatus} />} />
           </Route>
           <Route path='brands' element={<Brand />}>
             <Route path='' element={<BrandList loginStatus={loginStatus} searchKey={searchKey} />} />
             <Route path='create' element={<BrandAdd />} />
-            <Route path='edit'>
-              <Route path=':id' element={<BrandEdit />} />
-            </Route>
+            <Route path='edit/:id' element={<BrandEdit />} />
           </Route>
           <Route path='categories' element={<Category />}>
             <Route path='' element={<CategoryList loginStatus={loginStatus} searchKey={searchKey} />} />
             <Route path='create' element={<CategoryAdd />} />
-            <Route path='edit'>
-              <Route path=':id' element={<CategoryEdit />} />
-            </Route>
+            <Route path='edit/:id' element={<CategoryEdit />} />
           </Route>
           <Route path='/profile' element={<UserEdit imageHandler={imageHandler} />} />
+          <Route path='/about' element={<About />} />
         </Route>
         <Route path='/login' element={<Login loginStatus={loginStatus} loginHandler={loginHandler} />} />
         <Route path='/Register' element={<Register loginStatus={loginStatus} />} />

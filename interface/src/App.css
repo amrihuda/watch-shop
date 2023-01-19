@@ -12,7 +12,8 @@ body,
 }
 
 .container.pb-5 {
-    min-height: calc(100vh - 128px - 48px);
+    min-height: 100vh;
+    padding-top: 152px;
 }
 
 .login-page {
@@ -85,6 +86,10 @@ body,
     color: #2C74B3;
 }
 
+:root {
+    --bs-border-color: #2C74B3;
+}
+
 .bg-theme-1 {
     background-color: #0A2647;
     border-color: #2C74B3 !important;
@@ -107,6 +112,10 @@ input[type="search"]:focus {
     background-color: #2C74B3;
 }
 
+.text-theme {
+    color: #2C74B3;
+}
+
 .btn-primary {
     background-color: #205295;
     border-color: #2C74B3;
@@ -125,15 +134,20 @@ input[type="search"]:focus {
     color: black;
 }
 
-.btn-outline-primary.btn-card {
+.btn-outline-primary:hover {
+    background-color: #205295;
+    border-color: #2C74B3;
+    color: lightgray;
+}
+
+.btn-card {
     text-align: left;
     background-color: white;
     border-color: rgba(0, 0, 0, 0.175);
 }
 
-.btn-outline-primary:hover,
 .btn-card:hover {
-    background-color: #205295;
+    background-color: whitesmoke;
     border-color: #2C74B3;
-    color: lightgray;
+    color: black;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Navbar from './Navbar'
+import { Navbar, Footer } from '../components'
 
 const Main = (props) => {
     const { loginStatus, loginHandler, imageURL, searchHandler } = props
@@ -11,6 +11,7 @@ const Main = (props) => {
             <div className='container pb-5'>
                 <Outlet />
             </div>
+            <Footer />
         </>
     )
 }

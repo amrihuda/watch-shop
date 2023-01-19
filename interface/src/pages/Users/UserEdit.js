@@ -31,7 +31,7 @@ const UserEdit = (props) => {
     return (
         <>
             <form onSubmit={submitHandler} className='col-lg-6 mx-auto'>
-                <h3>Edit Brand</h3>
+                <h3>Edit Profile</h3>
                 <div className="mb-3">
                     <label className="form-label">Username</label>
                     <input

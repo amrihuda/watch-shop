@@ -15,7 +15,7 @@ const Navbar = (props) => {
     
     return (
         <>
-            <div className='sticky-top'>
+            <div className='fixed-top'>
                 <nav className="navbar navbar-expand-lg py-3 border-bottom bg-theme-1">
                     <div className="container">
                         <button className="navbar-toggler btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@ const Navbar = (props) => {
                                 <li><Link to="/items" className="nav-link px-2 link-theme-1">Watches</Link></li>
                                 <li><Link to="/categories" className="nav-link px-2 link-theme-1">Categories</Link></li>
                                 <li><Link to="/brands" className="nav-link px-2 link-theme-1">Brands</Link></li>
-                                <li><Link to="#" className="nav-link px-2 link-theme-1">About</Link></li>
+                                <li><Link to="/about" className="nav-link px-2 link-theme-1">About</Link></li>
                             </ul>
                         </div>
                     </div>
